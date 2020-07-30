@@ -8,6 +8,7 @@
   justify-content: space-around;
   margin-right: 2rem;
   cursor: pointer;
+  padding: 0 1rem;
 }
 
 .main-navigation__menu-btn span {
@@ -19,6 +20,7 @@
 
 .main-navigation__title {
   color: white;
+  padding: 0 1rem;
 }
 
 .main-navigation__title a {

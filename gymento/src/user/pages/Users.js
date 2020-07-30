@@ -5,7 +5,7 @@ import UsersList from "../components/UsersList";
 const Users = () => {
   const USERS = [
     {
-      id: "u01",
+      id: "u1",
       name: "Ali Bahrami",
       image: "https://randomuser.me/api/portraits/lego/2.jpg",
       places: 3,
