@@ -32,7 +32,7 @@ const DUMMY_PLACES = [
 ];
 
 const UserPlaces = () => {
-  return <PlaceList item={DUMMY_PLACES} />;
+  return <PlaceList items={DUMMY_PLACES} />;
 };
 
 export default UserPlaces;
