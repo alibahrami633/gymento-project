@@ -14,7 +14,7 @@ const Users = () => {
       id: "u2",
       name: "John Doe",
       image: "https://randomuser.me/api/portraits/lego/1.jpg",
-      places: 3,
+      places: 2,
     },
   ];
 
