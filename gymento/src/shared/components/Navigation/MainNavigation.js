@@ -28,14 +28,14 @@ const MainNavigation = (props) => {
         </nav>
       </SideDrawer>
       <MainHeader>
-        <botton
+        <button
           className="main-navigation__menu-btn"
           onClick={openDrawerHandler}
         >
           <span></span>
           <span></span>
           <span></span>
-        </botton>
+        </button>
         <h1 className="main-navigation__title">
           <Link to="/">Gymento</Link>
         </h1>

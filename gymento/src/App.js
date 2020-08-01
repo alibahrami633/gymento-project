@@ -12,7 +12,6 @@ import NewPlace from "./places/pages/NewPlace";
 import UserPlaces from "./places/pages/UserPlaces";
 
 import "./App.css";
-import MainHeader from "./shared/components/Navigation/MainHeader";
 
 const App = () => {
   return (
