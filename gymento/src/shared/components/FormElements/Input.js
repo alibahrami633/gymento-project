@@ -3,7 +3,13 @@ import React, { useReducer, useEffect } from "react";
 import { validate } from "../../util/validators";
 import "./Input.css";
 
-// using useReducer is more functional when we have a few states which are related to each other and we want to write a logic for them.
+/**
+ * useReducer function
+ * @param {*} state
+ * @param {*} action
+ * @returns a new state
+ * using useReducer is more functional when we have a few states which are related to each other and we want to write a logic for them.
+ */
 const inputReducer = (state, action) => {
   switch (action.type) {
     case "CHANGE":
@@ -25,6 +31,10 @@ const inputReducer = (state, action) => {
 
 const Input = (props) => {
   // second parameter is default value for inputReducer
+  /**
+   * @param {*} state
+   * @param {*} Object initial_state
+   */
   const [inputState, dispatch] = useReducer(inputReducer, {
     value: "",
     isTouched: false,
@@ -68,7 +78,7 @@ const Input = (props) => {
         id={props.id}
         rows={props.rows || 3}
         onChange={changeHandler}
-        onBlure={touchHandler} // on focus
+        onBlur={touchHandler} // on focus
         value={inputState.value}
       />
     );
