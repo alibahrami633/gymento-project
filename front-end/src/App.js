@@ -22,11 +22,34 @@ const App = () => {
   // to avoid re-creating it unnecessarily and to avoid infinite loops
   const login = useCallback(() => {
     setIsLoggedIn(true);
-  });
+  }, []);
 
   const logout = useCallback(() => {
     setIsLoggedIn(false);
-  });
+  }, []);
+
+  let routes;
+
+  if (isLoggedIn) {
+    routes = (
+      <>
+        <Route exact path="/" component={Users} />
+        <Route exact path="/:userId/places" component={UserPlaces} />
+        <Route exact path="/places/new" component={NewPlace} />
+        <Route exact path="/places/:placeId" component={UpdatePlace} />
+        <Redirect to="/" />
+      </>
+    );
+  } else {
+    routes = (
+      <>
+        <Route exact path="/" component={Users} />
+        <Route exact path="/:userId/places" component={UserPlaces} />
+        <Route path="/auth" component={Auth} />
+        <Redirect to="/auth" />
+      </>
+    );
+  }
 
   return (
     // value in AuthContext will binds the intial values in the AuthContext into a new value and by the value changing, all the components that listen to the context will be re-rendered
@@ -36,14 +59,7 @@ const App = () => {
       <Router>
         <MainNavigation />
         <main>
-          <Switch>
-            <Route exact path="/" component={Users} />
-            <Route exact path="/:userId/places" component={UserPlaces} />
-            <Route exact path="/places/new" component={NewPlace} />
-            <Route exact path="/places/:placeId" component={UpdatePlace} />
-            <Route exact path="/auth" component={Auth} />
-            <Redirect to="/" />
-          </Switch>
+          <Switch>{routes}</Switch>
         </main>
       </Router>
     </AuthContext.Provider>
