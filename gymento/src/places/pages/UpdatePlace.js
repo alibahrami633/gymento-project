@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Input from "../../shared/components/FormElements/Input";
 import Button from "../../shared/components/FormElements/Button";
@@ -40,6 +40,8 @@ const DUMMY_PLACES = [
 ];
 
 const UpdatePlace = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
   const placeId = useParams().placeId;
 
   const [formState, inputHandler, setFormData] = useForm(
@@ -72,6 +74,7 @@ const UpdatePlace = () => {
       },
       true
     );
+    setIsLoading(false);
   }, [setFormData, identifiedPlace]);
 
   const placeUpdateSubmitHandler = (event) => {
@@ -87,7 +90,7 @@ const UpdatePlace = () => {
     );
   }
 
-  if (!formState.inputs.title.value) {
+  if (isLoading) {
     return (
       <div className="center">
         <h2>Loading...</h2>
