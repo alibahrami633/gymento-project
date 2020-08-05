@@ -32,22 +32,22 @@ const App = () => {
 
   if (isLoggedIn) {
     routes = (
-      <>
+      <Switch>
         <Route exact path="/" component={Users} />
         <Route exact path="/:userId/places" component={UserPlaces} />
         <Route exact path="/places/new" component={NewPlace} />
-        <Route exact path="/places/:placeId" component={UpdatePlace} />
+        <Route path="/places/:placeId" component={UpdatePlace} />
         <Redirect to="/" />
-      </>
+      </Switch>
     );
   } else {
     routes = (
-      <>
+      <Switch>
         <Route exact path="/" component={Users} />
         <Route exact path="/:userId/places" component={UserPlaces} />
         <Route path="/auth" component={Auth} />
         <Redirect to="/auth" />
-      </>
+      </Switch>
     );
   }
 
@@ -58,9 +58,7 @@ const App = () => {
     >
       <Router>
         <MainNavigation />
-        <main>
-          <Switch>{routes}</Switch>
-        </main>
+        <main>{routes}</main>
       </Router>
     </AuthContext.Provider>
   );
