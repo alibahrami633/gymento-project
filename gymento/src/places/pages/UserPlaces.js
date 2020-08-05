@@ -34,9 +34,11 @@ const DUMMY_PLACES = [
 
 const UserPlaces = () => {
   const userId = useParams().userId; // get the dynamic url parameters from our defined routes (:userId in App.js)
+
   const filteredPlaces = DUMMY_PLACES.filter(
     (place) => place.creator === userId
   );
+
   return <PlaceList items={filteredPlaces} />;
 };
 
