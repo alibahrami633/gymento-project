@@ -17,7 +17,7 @@ import { AuthContext } from "./shared/Context/auth-context";
 import "./App.css";
 
 const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = setState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   // to avoid re-creating it unnecessarily and to avoid infinite loops
   const login = useCallback(() => {
@@ -31,7 +31,7 @@ const App = () => {
   return (
     // value in AuthContext will binds the intial values in the AuthContext into a new value and by the value changing, all the components that listen to the context will be re-rendered
     <AuthContext.Provider
-      value={{ isLoggedIn: isLoggedInl, login: login, logout: logout }}
+      value={{ isLoggedIn: isLoggedIn, login: login, logout: logout }}
     >
       <Router>
         <MainNavigation />
