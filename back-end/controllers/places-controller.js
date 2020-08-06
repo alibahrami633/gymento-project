@@ -1,3 +1,5 @@
+// the controller focuses on middleware and business logics of the app
+
 const HttpError = require("../models/http-error");
 
 const DUMMY_PLACES = [
@@ -58,5 +60,8 @@ const getPlaceByUserId = (req, res, next) => {
   res.json({ places });
 };
 
+const createPlace = (req, res, next) => {};
+
 exports.getPlaceById = getPlaceById;
 exports.getPlaceByUserId = getPlaceByUserId;
+exports.createPlace = createPlace;
