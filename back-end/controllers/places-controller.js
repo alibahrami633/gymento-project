@@ -46,16 +46,19 @@ const getPlaceById = (req, res, next) => {
   res.json({ place });
 };
 
-const getPlaceByUserId = (req, res, next) => {
+const getPlacesByUserId = (req, res, next) => {
   const userId = req.params.uid;
-  const places = DUMMY_PLACES.find((p) => {
+  const places = DUMMY_PLACES.filter((p) => {
     return p.creator === userId;
   });
 
-  if (!places) {
+  if (!places || places.length === 0) {
     // next is used for throwing errors in async functions - must be returned
     return next(
-      new HttpError("Could not find any place with the provided place ID.", 404)
+      new HttpError(
+        "Could not find any places with the provided place ID.",
+        404
+      )
     );
   }
 
@@ -100,7 +103,7 @@ const deletePlace = (req, res, next) => {
 };
 
 exports.getPlaceById = getPlaceById;
-exports.getPlaceByUserId = getPlaceByUserId;
+exports.getPlacesByUserId = getPlacesByUserId;
 exports.createPlace = createPlace;
 exports.updatePlace = updatePlace;
 exports.deletePlace = deletePlace;
