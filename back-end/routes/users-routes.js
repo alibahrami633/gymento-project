@@ -6,10 +6,10 @@ const usersControllers = require("../controllers/users-controller");
 
 const router = express.Router();
 
-router.get("/");
+router.get("/", usersControllers.getUsers);
 
-router.post("/signup");
+router.post("/signup", usersControllers.signUp);
 
-router.post("/login");
+router.post("/login", usersControllers.login);
 
 module.exports = router;
