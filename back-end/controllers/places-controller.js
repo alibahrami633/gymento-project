@@ -1,11 +1,11 @@
 // the controller focuses on middleware and business logics of the app
-const { uuid } = require("uuidv4");
 const { validationResult } = require("express-validator");
+const mongoose = require("mongoose");
 
 const HttpError = require("../models/http-error");
 const getCoordsFromAddress = require("../util/location");
 const Place = require("../models/place");
-const { use } = require("../routes/users-routes");
+const User = require("../models/user");
 
 let DUMMY_PLACES = [
   {
@@ -125,8 +125,28 @@ const createPlace = async (req, res, next) => {
     creator,
   });
 
+  let user;
   try {
-    await createdPlace.save();
+    user = await User.findById(creator);
+  } catch (err) {
+    return next(new HttpError("Could not find user by this id.", 404));
+  }
+
+  if (!user) {
+    return next(new HttpError("Creating place failed, try again later.", 500));
+  }
+
+  try {
+    // using session and transaction to make sure both adding new user transaction
+    // and adding the places transacton to the newly created user gets done in a session
+    // so if any of the transactions goes wrong, then all the transactions of that session rolls back
+    // and reversed by mongoose
+    const sess = await mongoose.startSession(); // adds a session
+    sess.startTransaction(); // start a transaction
+    await createdPlace.save({ session: sess }); // one transaction is executing
+    user.places.push(createdPlace); // another transaction is executing
+    await user.save({ session: sess }); // another transaction is executing
+    await sess.commitTransaction(); // if all the transactions go well, then commit the whole session
   } catch (err) {
     const error = new HttpError("Creating place failed.", 500);
     return next(error);
