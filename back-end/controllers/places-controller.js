@@ -44,7 +44,7 @@ const getPlaceById = async (req, res, next) => {
 const getPlacesByUserId = async (req, res, next) => {
   const userId = req.params.uid;
 
-  // let places;
+  // let places; // alternative way
   let userWithPlaces;
   try {
     userWithPlaces = await User.findById(userId).populate("places");
@@ -56,6 +56,7 @@ const getPlacesByUserId = async (req, res, next) => {
     return next(error);
   }
 
+  // if(!place || places.length === 0) { // alternative way
   if (!userWithPlaces || userWithPlaces.places.length === 0) {
     // next is used for throwing errors in async functions - must be returned
     return next(
