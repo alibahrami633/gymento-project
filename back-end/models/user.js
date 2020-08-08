@@ -8,7 +8,7 @@ const userSchema = new Schema({
   email: { type: String, requred: true, unique: true },
   password: { type: String, requred: true, minlength: 9 },
   image: { type: String, requred: true },
-  places: { type: String, requred: true },
+  places: [{ type: mongoose.Types.ObjectId, required: true, ref: "Place" }],
 });
 
 userSchema.plugin(uniqueValidator); // validates the email its unique property
