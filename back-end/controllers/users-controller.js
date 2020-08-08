@@ -8,10 +8,16 @@ const DUMMY_USERS = [
   { id: "u1", name: "Ali Bahrami", email: "a@b.com", password: "test" },
 ];
 
+/* ========================================================= */
+/* ======================= getUsers ======================== */
+/* ========================================================= */
 const getUsers = (req, res, next) => {
   res.json({ users: DUMMY_USERS });
 };
 
+/* ========================================================= */
+/* ======================== signUp ========================= */
+/* ========================================================= */
 const signUp = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -39,6 +45,9 @@ const signUp = (req, res, next) => {
   res.status(201).json({ user: createdUser });
 };
 
+/* ========================================================= */
+/* ========================= login ========================= */
+/* ========================================================= */
 const login = (req, res, next) => {
   const { email, password } = req.body;
 
@@ -49,6 +58,9 @@ const login = (req, res, next) => {
   res.json("Logged in!");
 };
 
+/* ========================================================= */
+/* ======================== exports ======================== */
+/* ========================================================= */
 exports.getUsers = getUsers;
 exports.signUp = signUp;
 exports.login = login;
