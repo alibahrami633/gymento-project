@@ -7,31 +7,6 @@ const getCoordsFromAddress = require("../util/location");
 const Place = require("../models/place");
 const User = require("../models/user");
 
-let DUMMY_PLACES = [
-  {
-    id: "p1",
-    title: "Empire Building",
-    description: "A famout sky scraper...",
-    location: {
-      lat: 40.7484405,
-      lng: -73.9878531,
-    },
-    address: "20 W 34th St, New York, NY 10001, United States",
-    creator: "u1",
-  },
-  {
-    id: "p2",
-    title: "Empire Building II",
-    description: "A famout sky scraper...",
-    location: {
-      lat: 40.7484405,
-      lng: -73.9878531,
-    },
-    address: "20 W 34th St, New York, NY 10001, United States",
-    creator: "u1",
-  },
-];
-
 /* ========================================================= */
 /* ====================== getPlaceById ===================== */
 /* ========================================================= */
@@ -69,10 +44,10 @@ const getPlaceById = async (req, res, next) => {
 const getPlacesByUserId = async (req, res, next) => {
   const userId = req.params.uid;
 
-  let places;
+  // let places;
+  let userWithPlaces;
   try {
-    // find in mongoose returns an array whereas in mongoDB returns a cursor for further iteration
-    places = await Place.find({ creator: userId }); // returns an array of db objects
+    userWithPlaces = await User.findById(userId).populate("places");
   } catch (err) {
     const error = new HttpError(
       "Fetching places failed, please try again later.",
@@ -81,7 +56,7 @@ const getPlacesByUserId = async (req, res, next) => {
     return next(error);
   }
 
-  if (!places || places.length === 0) {
+  if (!userWithPlaces || userWithPlaces.places.length === 0) {
     // next is used for throwing errors in async functions - must be returned
     return next(
       new HttpError(
@@ -92,7 +67,9 @@ const getPlacesByUserId = async (req, res, next) => {
   }
 
   res.json({
-    places: places.map((place) => place.toObject({ getters: true })), // cannot use toObject directly with places because find method returns an array
+    places: userWithPlaces.places.map((place) =>
+      place.toObject({ getters: true })
+    ), // cannot use toObject directly with places because find method returns an array
   });
 };
 
