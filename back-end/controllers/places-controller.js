@@ -31,21 +31,32 @@ let DUMMY_PLACES = [
   },
 ];
 
-const getPlaceById = (req, res, next) => {
+const getPlaceById = async (req, res, next) => {
   const placeId = req.params.pid;
-  const place = DUMMY_PLACES.find((p) => {
-    return p.id === placeId;
-  });
+
+  let place;
+
+  try {
+    place = await Place.findById(placeId); // finById is not async and does not return a promise. To convert it to a promise .exec() can be added
+  } catch (err) {
+    // database error
+    const error = new HttpError(
+      "Something went wrong. Could not find the place.",
+      500
+    );
+    return next(error);
+  }
 
   if (!place) {
-    // for sync funtions - does not require return before it
-    throw new HttpError(
+    // application side error
+    const error = new HttpError(
       "Could not find any place with the provided place ID.",
       404
     );
+    return next(error);
   }
-
-  res.json({ place });
+  // toObject method converts the incoming db object into a normal js object => getters: true
+  res.json({ place: place.toObject({ getters: true }) });
 };
 
 const getPlacesByUserId = (req, res, next) => {
