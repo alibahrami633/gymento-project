@@ -1,7 +1,5 @@
 // middleware responsible for handling routes related to places
 const express = require("express");
-
-// validation library
 const { check } = require("express-validator");
 
 const PlacesControllers = require("../controllers/places-controller");
