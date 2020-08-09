@@ -23,16 +23,24 @@ export const useHttpClient = () => {
         });
 
         const responseData = await response.json();
+
+        // keeps all the controllers except the one which was used in this request
+        activeHttpRequests.current = activeHttpRequests.current.filter(
+          (reqCtrl) => reqCtrl !== httpAbortCtrll
+        );
+
         // if the response code is 2xx ok will be true, otherwise if its 4xx or 5xx it should throw an error
         if (!response.ok) {
           throw new Error(responseData.message); // catch block will be triggered (4xx or 5xx)
         }
 
+        setIsLoading(false);
         return responseData;
       } catch (err) {
         setError(err.message);
+        setIsLoading(false);
+        throw err;
       }
-      setIsLoading(false);
     },
     []
   );
