@@ -17,23 +17,23 @@ import { AuthContext } from "./shared/Context/auth-context";
 import "./App.css";
 
 const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [token, setToken] = useState(false);
   const [userId, setUserId] = useState(false);
 
   // to avoid re-creating it unnecessarily and to avoid infinite loops
-  const login = useCallback((uid) => {
-    setIsLoggedIn(true);
+  const login = useCallback((uid, token) => {
+    setToken(token);
     setUserId(uid);
   }, []);
 
   const logout = useCallback(() => {
-    setIsLoggedIn(false);
+    setToken(null);
     setUserId(null);
   }, []);
 
   let routes;
 
-  if (isLoggedIn) {
+  if (token) {
     routes = (
       <Switch>
         <Route exact path="/" component={Users} />
@@ -58,7 +58,8 @@ const App = () => {
     // value in AuthContext will binds the intial values in the AuthContext into a new value and by the value changing, all the components that listen to the context will be re-rendered
     <AuthContext.Provider
       value={{
-        isLoggedIn: isLoggedIn,
+        isLoggedIn: !!token, // !! converts null or undefined to true
+        token: token,
         userId: userId,
         login: login,
         logout: logout,
