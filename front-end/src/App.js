@@ -23,6 +23,10 @@ const App = () => {
   // to avoid re-creating it unnecessarily and to avoid infinite loops
   const login = useCallback((uid, token) => {
     setToken(token);
+    localStorage.setItem(
+      "userData",
+      JSON.stringify({ userId: uid, token: token })
+    );
     setUserId(uid);
   }, []);
 
