@@ -87,17 +87,16 @@ const Auth = () => {
       } catch (err) {}
     } else {
       try {
+        const formData = new FormData(); // a built-in data format for storing and passing binary (image) on http requests
+        formData.append("email", formState.inputs.email.value); // both binary and text data can be appended to formData
+        formData.append("name", formState.inputs.name.value);
+        formData.append("password", formState.inputs.password.value);
+        formData.append("image", formState.inputs.image.value);
+
         const responseData = await sendRequest(
           "http://localhost:5000/api/users/signup",
           "POST",
-          JSON.stringify({
-            name: formState.inputs.name.value,
-            email: formState.inputs.email.value,
-            password: formState.inputs.password.value,
-          }),
-          {
-            "Content-Type": "application/json",
-          }
+          formData // it sets and sends the headers property automatically
         );
 
         auth.login(responseData.user.id);
