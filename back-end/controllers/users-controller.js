@@ -1,6 +1,7 @@
 // the controller focuses on middleware and business logics of the app
 const { validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 const HttpError = require("../models/http-error");
 const User = require("../models/user");
@@ -69,7 +70,24 @@ const signUp = async (req, res, next) => {
     return next(error);
   }
 
-  res.status(201).json({ user: createdUser.toObject({ getters: true }) });
+  let token;
+  try {
+    token = jwt.sign(
+      { userId: createdUser.id, email: createdUser.email },
+      "7189937431_secret_ali",
+      { expiresIn: "1h" }
+    );
+  } catch (err) {
+    const error = new HttpError("Signup failed. Try again.", 500);
+    return next(error);
+  }
+
+  res.status(201).json({
+    userId: createdUser.id,
+    email: createdUser.email,
+    name: createdUser.name,
+    token: token,
+  });
 };
 
 /* ========================================================= */
@@ -110,9 +128,23 @@ const login = async (req, res, next) => {
     return next(error);
   }
 
+  let token;
+  try {
+    token = jwt.sign(
+      { userId: existingUser.id, email: existingUser.email },
+      "7189937431_secret_ali",
+      { expiresIn: "1h" }
+    );
+  } catch (err) {
+    const error = new HttpError("Login failed. Try again.", 500);
+    return next(error);
+  }
+
   res.json({
-    message: "Logged in!",
-    user: existingUser.toObject({ getters: true }),
+    userId: existingUser.id,
+    email: existingUser.email,
+    name: existingUser.name,
+    token: token,
   });
 };
 
