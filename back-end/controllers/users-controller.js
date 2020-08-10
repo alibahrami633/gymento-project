@@ -24,9 +24,7 @@ const getUsers = async (req, res, next) => {
 const signUp = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    console.log(errors);
-    const error = new HttpError("Invalid inputs, please check your data.", 422);
-    return next(error);
+    return next(new HttpError("Invalid inputs, please check your data.", 422));
   }
 
   const { name, email, password } = req.body;
@@ -47,7 +45,7 @@ const signUp = async (req, res, next) => {
   const createdUser = new User({
     name,
     email,
-    image: "https://randomuser.me/api/portraits/lego/2.jpg",
+    image: req.file.path,
     password,
     places: [],
   });
