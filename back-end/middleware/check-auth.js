@@ -16,7 +16,7 @@ module.exports = (req, res, next) => {
     if (!token) {
       throw new Error("Authentication failed.", 403);
     }
-    const deccodedToken = jwt.verify(token, "7189937431_secret_ali");
+    const deccodedToken = jwt.verify(token, process.env.JWT_KEY);
     req.userData = { userId: deccodedToken.userId };
     next();
   } catch (err) {
