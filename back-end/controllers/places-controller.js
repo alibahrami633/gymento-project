@@ -1,4 +1,6 @@
 // the controller focuses on middleware and business logics of the app
+const fs = require("fs");
+
 const { validationResult } = require("express-validator");
 const mongoose = require("mongoose");
 
@@ -99,7 +101,7 @@ const createPlace = async (req, res, next) => {
     description,
     address,
     location: coordinates,
-    image: "https://media.timeout.com/images/105641738/1024/576/image.jpg",
+    image: req.file.path,
     creator,
   });
 
@@ -194,6 +196,8 @@ const deletePlace = async (req, res, next) => {
     return next(new HttpError("Could not find place with this id.", 404));
   }
 
+  const imagePath = place.image;
+
   try {
     const sess = await mongoose.startSession(); // adds a session
     sess.startTransaction(); // start a transaction
@@ -208,6 +212,10 @@ const deletePlace = async (req, res, next) => {
     );
     return next(error);
   }
+
+  fs.unlink(imagePath, (err) => {
+    console.log(err);
+  });
 
   res.status(200).json({ message: "Place was deleted." });
 };
