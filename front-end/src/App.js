@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -33,7 +33,17 @@ const App = () => {
   const logout = useCallback(() => {
     setToken(null);
     setUserId(null);
+    localStorage.removeItem("userData");
   }, []);
+
+  // for checking the local storage to see if a user is logged in. It only runs once at the start of the App
+  // login as a dependency here will not be re-rendered bacause we used useCallBack.
+  useEffect(() => {
+    const storedData = JSON.parse(localStorage.getItem("userData"));
+    if (storedData && storedData.token) {
+      login(storedData.id, storedData.token);
+    }
+  }, [login]);
 
   let routes;
 
