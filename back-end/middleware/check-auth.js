@@ -14,13 +14,13 @@ module.exports = (req, res, next) => {
     // Query params (?token=abc...) are one choice and the other one is passing the token through headers which is cleaner
     const token = req.headers.authorization.split(" ")[1]; // Athorization: 'Bearer TOKEN' ==split==> 'Bearer' and 'TOKEN'
     if (!token) {
-      throw new Error("Authentication failed.", 401);
+      throw new Error("Authentication failed.", 403);
     }
     const deccodedToken = jwt.verify(token, "7189937431_secret_ali");
     req.userData = { userId: deccodedToken.userId };
     next();
   } catch (err) {
-    const error = new HttpError("Authentication failed.", 401);
+    const error = new HttpError("Authentication failed.", 403);
     return next(error);
   }
 };

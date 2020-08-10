@@ -160,6 +160,7 @@ const updatePlace = async (req, res, next) => {
   }
 
   // authorization: checks if the userId of the logged in client is equal to the userId passed into the request
+  // here creator is _id which is a mongoose object and should be converted to a string
   if (place.creator.toString() !== req.userData.userId) {
     const error = new HttpError(
       "Unauthorized access, not allowed to update the place.",
@@ -203,6 +204,16 @@ const deletePlace = async (req, res, next) => {
 
   if (!place) {
     return next(new HttpError("Could not find place with this id.", 404));
+  }
+
+  // authorization: checks if the userId of the logged in client is equal to the userId passed into the request
+  // here creator is an object because populate method returns an object and we can have access to its id property
+  if (place.creator.id !== req.userData.userId) {
+    const error = new HttpError(
+      "Unauthorized access, not allowed to delete the place.",
+      401
+    );
+    return next(error);
   }
 
   const imagePath = place.image;
