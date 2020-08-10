@@ -159,6 +159,15 @@ const updatePlace = async (req, res, next) => {
     return next(error);
   }
 
+  // authorization: checks if the userId of the logged in client is equal to the userId passed into the request
+  if (place.creator.toString() !== req.userData.userId) {
+    const error = new HttpError(
+      "Unauthorized access, not allowed to update the place.",
+      401
+    );
+    return next(error);
+  }
+
   place.title = title;
   place.description = description;
 
