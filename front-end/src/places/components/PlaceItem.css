@@ -7,6 +7,10 @@
 }
 
 .place-item__info {
+  border-color: transparent;
+  border-bottom-left-radius: 0.6em;
+  border-bottom-right-radius: 0.6em;
+  background-color: rgba(255, 255, 255, 0.884);
   padding: 1rem;
   text-align: center;
 }
@@ -32,7 +36,6 @@
 .place-item__actions {
   padding: 1rem;
   text-align: center;
-  border-top: 1px solid #ccc;
 }
 
 .place-item__modal-content {

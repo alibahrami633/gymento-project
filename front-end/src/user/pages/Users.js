@@ -5,6 +5,8 @@ import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 import { useHttpClient } from "../../shared/hooks/http-hook";
 
+import "./Users.css";
+
 const Users = () => {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [loadedUsers, setLoadedUsers] = useState();
@@ -26,7 +28,7 @@ const Users = () => {
   }, [sendRequest]);
 
   return (
-    <>
+    <div className="container-background__users">
       <ErrorModal error={error} onClear={clearError} />
       {isLoading && (
         <div className="center">
@@ -34,7 +36,7 @@ const Users = () => {
         </div>
       )}
       {!isLoading && loadedUsers && <UsersList items={loadedUsers} />}
-    </>
+    </div>
   );
 };
 
