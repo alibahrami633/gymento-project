@@ -36,7 +36,8 @@ const MainNavigation = (props) => {
           <span></span>
           <span></span>
         </button>
-        <h1 className="main-navigation__title">
+        <div className="main-navigation__title-triangle"></div>
+        <h1 className="main-navigation__title ">
           <Link to="/">Gymento</Link>
         </h1>
         <nav className="main-navigation__header-nav">

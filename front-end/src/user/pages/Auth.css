@@ -13,3 +13,13 @@
 .authentication form {
   margin-bottom: 1rem;
 }
+
+.container-background__auth {
+  height: 120vh;
+}
+
+@media only screen and (max-width: 411px) {
+  .container-background__auth {
+    height: 155vh;
+  }
+}

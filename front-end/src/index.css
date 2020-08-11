@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Lobster:400,700&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Aguafina+Script:400,700&display=swap");
 
 * {
   box-sizing: border-box;
@@ -23,10 +25,6 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-}
-
-main {
-  /* height: 100vh; */
 }
 
 .slide-in-left-enter {

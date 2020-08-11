@@ -101,7 +101,7 @@ const UpdatePlace = () => {
   }
 
   return (
-    <>
+    <div className="container-background__places">
       <ErrorModal error={error} onClear={clearError} />
       {!isLoading && loadedPlace && (
         <form className="place-form" onSubmit={placeUpdateSubmitHandler}>
@@ -131,7 +131,7 @@ const UpdatePlace = () => {
           </Button>
         </form>
       )}
-    </>
+    </div>
   );
 };
 

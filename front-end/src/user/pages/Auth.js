@@ -103,7 +103,7 @@ const Auth = () => {
   };
 
   return (
-    <>
+    <div className="container-background__auth">
       {/* error state */}
       <ErrorModal error={error} onClear={clearError} />
       <Card className="authentication">
@@ -156,7 +156,7 @@ const Auth = () => {
           SWITCH TO {isLoginMode ? "SIGNUP" : "LOGIN"}
         </Button>
       </Card>
-    </>
+    </div>
   );
 };
 

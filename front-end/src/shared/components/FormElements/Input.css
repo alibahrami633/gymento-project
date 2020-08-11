@@ -13,12 +13,17 @@
   margin-bottom: 0.5rem;
 }
 
+.form-control input {
+  height: 2.5rem;
+}
+
 .form-control input,
 .form-control textarea {
+  border-radius: 0.5em;
   width: 100%;
   font: inherit;
   border: 1px solid #ccc;
-  background: #f8f8f8;
+  background: #dddddd;
   padding: 0.15rem 0.25rem;
 }
 
