@@ -5,14 +5,14 @@
 }
 
 .lds-dual-ring:after {
-  content: ' ';
+  content: " ";
   display: block;
   width: 46px;
   height: 46px;
   margin: 1px;
   border-radius: 50%;
-  border: 5px solid #510077;
-  border-color: #510077 transparent #510077 transparent;
+  border: 5px solid #d8d8d8;
+  border-color: #747474 transparent #363636 transparent;
   animation: lds-dual-ring 1.2s linear infinite;
 }
 
