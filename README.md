@@ -18,7 +18,7 @@ Gymento is a Gym social media application built to make the communication betwee
 ## Technical Details
 
 <p>
-This application was developed in MERN (MongoDB, Express, React, Node) stack. It utilizes JWT for Authentication and Authorization.
+A Full-stack applicartion developed with MERN (MongoDB, Express, React, Node) stack. It utilizes JWT for Authentication and Authorization.
 </p>
 <p>
 Here are the other technical features used in this application: 
