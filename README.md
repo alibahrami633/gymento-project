@@ -26,7 +26,7 @@ Here are the other technical features used in this application:
 
 - Hashed Password
 - Google Maps and Geocoding API
-- React Hooks (useEffect, Custom Hook, useRef, useState)
+- React Hooks (useEffect, useReducer, Custom Hook, useRef)
 - React CSS Animation
 - Local Storage
 - JSON Web Token (JWT)
