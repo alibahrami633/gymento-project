@@ -8,6 +8,7 @@ export const useAuth = () => {
   const [userId, setUserId] = useState(false);
 
   // to avoid re-creating it unnecessarily and to avoid infinite loops
+  // to optimize the rendering behavior of React function components
   const login = useCallback((uid, token, expirationDate) => {
     setToken(token);
     setUserId(uid);
