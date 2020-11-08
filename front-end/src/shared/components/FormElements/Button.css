@@ -18,14 +18,14 @@
 
 .button:hover,
 .button:active {
-  color: #111111;
-  background: #57ec00;
-  border-color: #57ec00;
+  color: #363636;
+  background: #80e048;
+  border-color: #88db58;
 }
 
 .button--inverse {
   background: transparent;
-  color: #111111;
+  color: #ffffff;
 }
 
 .button--inverse:hover,
