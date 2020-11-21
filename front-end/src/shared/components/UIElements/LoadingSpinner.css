@@ -1,4 +1,5 @@
-.lds-dual-ring {
+/* ================ Spinner Loader ================ */
+/* .lds-dual-ring {
   display: inline-block;
   width: 64px;
   height: 64px;
@@ -7,13 +8,13 @@
 .lds-dual-ring:after {
   content: " ";
   display: block;
-  width: 46px;
-  height: 46px;
-  margin: 1px;
+  width: 5rem;
+  height: 5rem;
+  margin-top: 7rem;
   border-radius: 50%;
-  border: 5px solid #d8d8d8;
-  border-color: #747474 transparent #363636 transparent;
-  animation: lds-dual-ring 1.2s linear infinite;
+  border: 0.7rem solid #d8d8d8;
+  border-color: #f8df00 transparent #56b122 transparent;
+  animation: lds-dual-ring 0.7s linear infinite;
 }
 
 .loading-spinner__overlay {
@@ -34,5 +35,100 @@
   }
   100% {
     transform: rotate(360deg);
+  }
+} */
+
+/* =================== Heart Loader ==================== */
+/* .lds-heart {
+  display: inline-block;
+  position: relative;
+  width: 160px;
+  height: 160px;
+  transform: rotate(45deg);
+  transform-origin: 80px 80px;
+}
+
+.lds-heart div {
+  top: 64px;
+  left: 64px;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  background: #56b122;
+  animation: lds-heart 1.2s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+.lds-heart div:after,
+.lds-heart div:before {
+  content: " ";
+  position: absolute;
+  display: block;
+  width: 65px;
+  height: 65px;
+  background: #56b122;
+}
+.lds-heart div:before {
+  left: -24px;
+  border-radius: 50% 0 0 50%;
+}
+.lds-heart div:after {
+  top: -24px;
+  border-radius: 50% 50% 0 0;
+}
+@keyframes lds-heart {
+  0% {
+    transform: scale(0.95);
+  }
+  5% {
+    transform: scale(1.1);
+  }
+  39% {
+    transform: scale(0.85);
+  }
+  45% {
+    transform: scale(1);
+  }
+  60% {
+    transform: scale(0.95);
+  }
+  100% {
+    transform: scale(0.9);
+  }
+} */
+/* =================== Heart Loader ==================== */
+.heart {
+  fill: #56b122;
+  position: relative;
+  top: 3rem;
+  width: 80px;
+  animation: pulse 1s ease infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    ffill: #56b122;
+  }
+  3% {
+    fill: #f8df00;
+  }
+  10% {
+    transform: scale(1.1);
+    fill: red;
+  }
+  39% {
+    transform: scale(0.85);
+    fill: #56b122;
+  }
+  45% {
+    transform: scale(1);
+    fill: red;
+  }
+  60% {
+    transform: scale(0.95);
+    fill: #f8df00;
+  }
+  100% {
+    transform: scale(0.9);
+    fill: #56b122;
   }
 }
